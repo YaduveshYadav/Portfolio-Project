@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Yaduvesh's Portfolio</title>
+    <style>
+        /* General styles */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #121212;
+            color: #f5f5f5;
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            background: #1e1e1e;
+            color: #fff;
+            padding: 0 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+        
+        nav ul li {
+            list-style: none;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-weight: 400;
+            transition: color 0.3s, transform 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #00e0ff;
+            transform: translateY(-3px);
+        }
+        
+        main {
+            margin-top: 80px;
+            padding: 20px;
+        }
+        
+        .hero-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: #fff;
+            text-align: center;
+            flex-direction: column;
+            animation: fadeIn 1.5s ease-in;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+        
+        .hero-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero-section p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .hero-section a {
+            background: #00e0ff;
+            color: #1e1e1e;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(0, 224, 255, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .hero-section a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 224, 255, 0.7);
+        }
+        
+        .about-section,
+        .skills-section,
+        .projects-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .about-section h2,
+        .skills-section h2,
+        .projects-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            color: #00e0ff;
+            text-transform: uppercase;
+        }
+        
+        .about-section h2::before,
+        .skills-section h2::before,
+        .projects-section h2::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #00e0ff;
+        }
+        
+        .skills-grid,
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .skills-grid .skill-card,
+        .projects-grid .project-card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .skills-grid .skill-card:hover::before,
+        .projects-grid {
+            opacity: 1;
+        }
+        
+        .skills-grid .skill-card:hover,
+        .projects-grid .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skills-grid .skill-card::before,
+        .projects-grid .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 224, 255, 0.3), rgba(0, 114, 255, 0.3));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .skill-card h3,
+        .project-card h3 {
+            font-size: 1.8rem;
+            color: #00e0ff;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .skill-card p,
+        .project-card p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        /* Different style for Python project card */
+        
+        .python-card {
+            background: #272727;
+            border: 2px solid #00e0ff;
+        }
+        
+        .python-card h3 {
+            color: #00c6ff;
+        }
+        
+        .python-card p {
+            color: #ccc;
+        }
+        
+        .ml-card {
+            background: #1a1a1a;
+            border: 2px solid #ff00ff;
+        }
+        
+        .ml-card h3 {
+            color: #ff00ff;
+        }
+        
+        .ml-card p {
+            color: #ddd;
+        }
+        /* Common button styling */
+        /* General styles */
+        
+        .project-card a {
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-align: center;
+            display: inline-block;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+        }
+        /* Python card styles */
+        
+        .python-card h3 {
+            color: #00c6ff;
+        }
+        
+        .python-card p {
+            color: #ccc;
+        }
+        
+        .python-card a {
+            background: #00c6ff;
+            /* Button background matching the card text color */
+        }
+        
+        .python-card:hover a {
+            background: #009add;
+            /* Darker shade on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 198, 255, 0.7);
+        }
+        /* ML card styles */
+        
+        .ml-card h3 {
+            color: #ff00ff;
+        }
+        
+        .ml-card p {
+            color: #ddd;
+        }
+        
+        .ml-card a {
+            background: #ff00ff;
+            /* Button background matching the card text color */
+        }
+        
+        .ml-card:hover a {
+            background: #cc00cc;
+            /* Darker shade on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 255, 0.7);
+        }
+        
+        footer {
+            background: #1e1e1e;
+            color: #f5f5f5;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 5px solid #00e0ff;
+        }
+        
+        footer h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        footer p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        footer a {
+            color: #00e0ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        footer a:hover {
+            color: #00c6ff;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left"><a href="#home" style="text-decoration:none; color:#fff;">Friend's Portfolio</a></div>
+            <div class="right">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main id="home">
+        <section class="hero-section">
+            <h1>Hello, I'm <span style="color:#000000;">Yaduvesh Yadav</span></h1>
+            <p>Full-Stack Developer | Prompt Engineer | Problem Solver</p>
+            <a href="#projects">View My Work</a>
+        </section>
+        <section id="about" class="about-section">
+            <h2>About Me</h2>
+            <p>Passionate developer with a love for creating innovative web solutions.</p>
+        </section>
+        <section id="skills" class="skills-section">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Full-Stack Development</h3>
+                    <p>Experience in building responsive web applications using modern technologies.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Prompt Engineer</h3>
+                    <p>Crafting and optimizing prompts used to interact with AI models.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Problem Solving</h3>
+                    <p>Analytical thinker with strong debugging and optimization skills.</p>
+                </div>
+            </div>
+        </section>
+        <section id="projects" class="projects-section">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card python-card">
+                    <h3>Python Projects</h3>
+                    <p>Responsive Python projects built with HTML, CSS, and JavaScript.</p>
+                    <a href="Pythons.html">View Project</a>
+                </div>
+                <div class="project-card ml-card">
+                    <h3>Machine Learning Projects</h3>
+                    <p>Some machine learning projects with integration.</p>
+                    <a href="MLprojects.html">View Project</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="contact">
+        <h2>Contact Me</h2>
+        <p>Let's work together to build something amazing.</p>
+        <a href="https://www.linkedin.com/in/yaduvesh-yadav-693419259/">
+            <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="yaduveshyadav04@gmail.com">
+            <i class="fas fa-envelope"></i> Email
+        </a>
+    </footer>
+</body>
+
+</html>
